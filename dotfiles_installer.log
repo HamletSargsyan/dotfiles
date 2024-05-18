@@ -1,0 +1,5 @@
+[2024-05-19 00:13:25] [INFO] Start installing packages with from scripts
+[2024-05-19 00:13:25] [INFO] Installing curl -sSL https://install.python-poetry.org | python3 -
+[2024-05-19 00:13:25] [INFO] Installing sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+[2024-05-19 00:14:11] [INFO] Start installing packages with from scripts
+[2024-05-19 00:14:12] [INFO] Installing curl -sSL https://install.python-poetry.org | python3 -
