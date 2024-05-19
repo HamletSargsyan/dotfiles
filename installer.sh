@@ -1,5 +1,8 @@
 #!/bin/bash
 
+git submodule update --init --recursive
+
+
 SUDO_COMMAND=
 PKG_MANAGER=
 
@@ -32,6 +35,8 @@ pip_packages=(
 )
 
 
+$SUDO_COMMAND $PKG_MANAGER update -y
+
 if [ ! -n $TERMUX_VERSION];
 then
     pip install ruff
@@ -42,7 +47,7 @@ fi
 
 for package in "${packages[@]}"
 do
-    $SUDO_COMMAND $PKG_MANAGER install $package
+    yes | $SUDO_COMMAND $PKG_MANAGER install $package
 done
 
 
