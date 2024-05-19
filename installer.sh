@@ -73,4 +73,5 @@ log INFO "Installing zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 log INFO "changing shell"
-chsh $(which zsh)
+chsh -s $(which zsh)
+
