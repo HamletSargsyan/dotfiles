@@ -53,7 +53,6 @@ done
 
 for package in "${pip_packages[@]}"
 do
-    log INFO "Installing $package"
     pip install $package
 done
 
@@ -65,7 +64,7 @@ chsh --shell $(which zsh)
 
 cp zshrc ~/.zshrc
 cp p10k.zsh ~/.p10k.zsh
-cp -r oh-my-zsh ~/.oh-my-zsh
+cp -rv oh-my-zsh ~/.oh-my-zsh
 
 mkdir -p ~/.config
 
