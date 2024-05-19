@@ -75,3 +75,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 log INFO "changing shell"
 chsh -s $(which zsh)
 
+# ---------------------------------------------------------------------------- #
+
+cp zshrc ~/.zshrc
+cp p10k.zsh ~/.p10k.zsh
+cp -r oh-my-zsh ~/.oh-my-zsh
+
+mkdir -p ~/.config
+
+ 
