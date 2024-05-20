@@ -37,7 +37,7 @@ pip_packages=(
 
 $SUDO_COMMAND $PKG_MANAGER update -y
 
-if [ ! -n $TERMUX_VERSION];
+if [ ! -n $TERMUX_VERSION ];
 then
     pip install ruff
     curl -sSL https://install.python-poetry.org | python3 -
