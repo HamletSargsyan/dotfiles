@@ -78,9 +78,5 @@ git clone https://github.com/HamletSargsyan/astronvim_config ~/.config/nvim
 
 curl https://getcroc.schollz.com | bash
 
-if [[ -n $TERMUX_VERSION ]]; then
-    echo "clear" >> ~/.zshrc
-fi
-
 
 exec zsh
