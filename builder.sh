@@ -1,8 +1,5 @@
 #!/bin/bash
 
-git submodule update --init --recursive
-
-
 SUDO_COMMAND=
 PKG_MANAGER=
 
@@ -28,6 +25,7 @@ packages=(
     tree
     zsh
     which
+    man
 )
 
 pip_packages=(
@@ -77,6 +75,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 git clone https://github.com/HamletSargsyan/astronvim_config ~/.config/nvim
+
+curl https://getcroc.schollz.com | bash
 
 if [[ -n $TERMUX_VERSION ]]; then
     echo "clear" >> ~/.zshrc
