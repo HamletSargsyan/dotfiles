@@ -4,6 +4,7 @@ SUDO_COMMAND=
 PKG_MANAGER=
 
 if [ -n "$TERMUX_VERSION" ]; then
+    termux-change-repo
     PKG_MANAGER="pkg"
 else
     SUDO_COMMAND="sudo"
