@@ -58,8 +58,6 @@ done
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-chsh -s $(which zsh)
-
 
 cp zshrc ~/.zshrc
 cp p10k.zsh ~/.p10k.zsh
