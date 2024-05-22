@@ -83,3 +83,5 @@ fi
 
 go install github.com/bloznelis/typioca@latest
 go install github.com/mistakenelf/fm@latest
+
+touch ~/.hushlogin
