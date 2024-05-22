@@ -76,5 +76,10 @@ git clone https://github.com/HamletSargsyan/astronvim_config ~/.config/nvim
 
 curl https://getcroc.schollz.com | bash
 
+if [[ $TERMUX_VERSION ]]; then
+    rm -rfv ~/.termux/
+    cp -r ./termux/ ~/.termux/
+fi
 
-exec zsh
+go install github.com/bloznelis/typioca@latest
+go install github.com/mistakenelf/fm@latest
