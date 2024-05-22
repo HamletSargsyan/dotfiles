@@ -50,7 +50,7 @@ for package in "${pip_packages[@]}"; do
 done
 
 RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-chsh zsh
+echo zsh | chsh
 
 cp zshrc ~/.zshrc
 cp p10k.zsh ~/.p10k.zsh
