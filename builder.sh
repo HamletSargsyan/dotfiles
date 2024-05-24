@@ -13,7 +13,6 @@ fi
 
 packages=(
     python3
-    rust
     bat
     bpython
     neofetch
@@ -39,6 +38,9 @@ $SUDO_COMMAND $PKG_MANAGER update -y
 if [[ -z "$TERMUX_VERSION" ]]; then
     pip install ruff
     curl -sSL https://install.python-poetry.org | python3 -
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+else
+    pkg install rust
 fi
 
 for package in "${packages[@]}"; do
