@@ -11,6 +11,10 @@ else
     PKG_MANAGER="apt"
 fi
 
+
+yes | $SUDO_COMMAND $PKG_MANAGER update
+yes | $SUDO_COMMAND $PKG_MANAGER upgrade
+
 packages=(
     python3
     bat
@@ -31,14 +35,16 @@ packages=(
 pip_packages=(
     black
     pyright
+    isort
 )
 
 $SUDO_COMMAND $PKG_MANAGER update -y
 
 if [[ -z "$TERMUX_VERSION" ]]; then
-    pip install ruff
     curl -sSL https://install.python-poetry.org | python3 -
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
+    pip install ruff
 else
     pkg install rust
 fi
@@ -77,6 +83,13 @@ fi
 
 go install github.com/bloznelis/typioca@latest
 go install github.com/mistakenelf/fm@latest
+
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java 19.0.2-open
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install 20
 
 touch ~/.hushlogin
 
