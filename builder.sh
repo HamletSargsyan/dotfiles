@@ -60,6 +60,8 @@ if [[ -z "$TERMUX_VERSION" ]]; then
     mkdir -p ~/.local/share/fonts/
     cp meslo-font/* ~/.local/share/fonts/
     fc-cache -f -v
+
+    sudo apt install python3.12-venv
 else
     pkg install rust
 
