@@ -30,6 +30,7 @@ packages=(
     "zsh"
     "which"
     "man"
+    "zip"
 )
 
 pip_packages=(
