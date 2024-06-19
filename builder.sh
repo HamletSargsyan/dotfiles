@@ -42,6 +42,9 @@ pip_packages=(
 
 $SUDO_COMMAND $PKG_MANAGER update -y
 
+mkdir -p meslo-font
+tar -xvf meslo-font.tar -C ./meslo-font
+
 if [[ -z "$TERMUX_VERSION" ]]; then
     curl -sSL https://install.python-poetry.org | python3 -
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -50,9 +53,16 @@ if [[ -z "$TERMUX_VERSION" ]]; then
     pip install ruff
     
     sudo apt install openssh-server
-    sudo apt install openssh-server
+    sudo systemctl start ssh
+    sudo systemctl enable ssh
+
+    mkdir -p ~/.local/share/fonts/
+    cp meslo-font/* ~/.local/share/fonts/
+    fc-cache -f -v
 else
     pkg install rust
+
+    cp meslo-font/"MesloLGS NF Regular.ttf" termux/font.ttf
 fi
 
 for package in "${packages[@]}"; do
@@ -100,6 +110,7 @@ sdk install java 19.0.2-open
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
+
 
 touch ~/.hushlogin
 
