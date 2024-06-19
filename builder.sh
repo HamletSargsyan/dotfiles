@@ -16,26 +16,28 @@ yes | $SUDO_COMMAND $PKG_MANAGER update
 yes | $SUDO_COMMAND $PKG_MANAGER upgrade
 
 packages=(
-    python3
-    bat
-    bpython
-    neofetch
-    neovim
-    calc
-    htop
-    curl
-    wget
-    golang
-    tree
-    zsh
-    which
-    man
+    "python3"
+    "bat"
+    "bpython"
+    "neofetch"
+    "neovim"
+    "calc"
+    "htop"
+    "curl"
+    "wget"
+    "golang"
+    "tree"
+    "zsh"
+    "which"
+    "man"
 )
 
 pip_packages=(
-    black
-    pyright
-    isort
+    "black"
+    "pyright"
+    "isort"
+    "mypy"
+    "pre-commit"
 )
 
 $SUDO_COMMAND $PKG_MANAGER update -y
@@ -44,7 +46,11 @@ if [[ -z "$TERMUX_VERSION" ]]; then
     curl -sSL https://install.python-poetry.org | python3 -
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
+    
     pip install ruff
+    
+    sudo apt install openssh-server
+    sudo apt install openssh-server
 else
     pkg install rust
 fi
@@ -53,12 +59,16 @@ for package in "${packages[@]}"; do
     yes | $SUDO_COMMAND $PKG_MANAGER install "$package"
 done
 
+if ! command -v pip &> /dev/null; then
+    sudo apt-get install python3-pip
+fi
+
 for package in "${pip_packages[@]}"; do
     pip install "$package"
 done
 
 RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-echo zsh | chsh
+# echo zsh | chsh
 
 cp zshrc ~/.zshrc
 cp p10k.zsh ~/.p10k.zsh
