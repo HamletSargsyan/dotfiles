@@ -64,7 +64,9 @@ if [[ -z "$TERMUX_VERSION" ]]; then
 
     sudo apt install python3.12-venv
 else
-    pkg install rust
+    pkg install rust python-cryptography
+
+    pip install poetry
 
     cp meslo-font/"MesloLGS NF Regular.ttf" termux/font.ttf
 fi
