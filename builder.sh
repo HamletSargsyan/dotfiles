@@ -31,6 +31,7 @@ packages=(
     "which"
     "man"
     "zip"
+    "gh"
 )
 
 pip_packages=(
