@@ -117,6 +117,7 @@ sdk install java 19.0.2-open
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
 
+cargo install numbat-cli
 
 touch ~/.hushlogin
 
