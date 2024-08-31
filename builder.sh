@@ -51,9 +51,9 @@ if [[ -z "$TERMUX_VERSION" ]]; then
     curl -sSL https://install.python-poetry.org | python3 -
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
-    
+
     pip install ruff
-    
+
     sudo apt install openssh-server
     sudo systemctl start ssh
     sudo systemctl enable ssh
@@ -63,6 +63,9 @@ if [[ -z "$TERMUX_VERSION" ]]; then
     fc-cache -f -v
 
     sudo apt install python3.12-venv
+
+    sudo apt install flatpak
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 else
     pkg install rust python-cryptography
 
