@@ -1,20 +1,23 @@
 #!/bin/bash
 
-SUDO_COMMAND=
-PKG_MANAGER=
+# Определение команд для sudo и пакетного менеджера
+SUDO_COMMAND=""
+PKG_MANAGER=""
 
 if [[ -n "$TERMUX_VERSION" ]]; then
     termux-change-repo
     PKG_MANAGER="pkg"
 else
-    SUDO_COMMAND="sudo"
+    if command -v sudo &> /dev/null; then
+        SUDO_COMMAND="sudo"
+    fi
     PKG_MANAGER="apt"
 fi
 
+# Обновление пакетов
+$SUDO_COMMAND $PKG_MANAGER update -y && $SUDO_COMMAND $PKG_MANAGER upgrade -y
 
-yes | $SUDO_COMMAND $PKG_MANAGER update
-yes | $SUDO_COMMAND $PKG_MANAGER upgrade
-
+# Список пакетов для установки
 packages=(
     "python3"
     "bat"
@@ -42,86 +45,85 @@ pip_packages=(
     "pre-commit"
 )
 
-$SUDO_COMMAND $PKG_MANAGER update -y
-
-mkdir -p meslo-font
-tar -xvf meslo-font.tar -C ./meslo-font
-
-if [[ -z "$TERMUX_VERSION" ]]; then
-    curl -sSL https://install.python-poetry.org | python3 -
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
-
-    pip install ruff
-
-    sudo apt install openssh-server
-    sudo systemctl start ssh
-    sudo systemctl enable ssh
-
-    mkdir -p ~/.local/share/fonts/
-    cp meslo-font/* ~/.local/share/fonts/
-    fc-cache -f -v
-
-    sudo apt install python3.12-venv
-
-    sudo apt install flatpak
-    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-else
-    pkg install rust python-cryptography
-
-    pip install poetry
-
-    cp meslo-font/"MesloLGS NF Regular.ttf" termux/font.ttf
-fi
-
+# Установка пакетов
 for package in "${packages[@]}"; do
-    yes | $SUDO_COMMAND $PKG_MANAGER install "$package"
+    $SUDO_COMMAND $PKG_MANAGER install -y "$package"
 done
 
-if ! command -v pip &> /dev/null; then
-    sudo apt-get install python3-pip
+# Проверка и установка pip3
+if ! command -v pip3 &> /dev/null; then
+    $SUDO_COMMAND $PKG_MANAGER install -y python3-pip
 fi
 
+# Установка pip пакетов
 for package in "${pip_packages[@]}"; do
-    pip install "$package"
+    pip3 install "$package"
 done
 
+# Установка oh-my-zsh и смена оболочки
 RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 chsh -s $(which zsh)
 
+# Копирование конфигураций
 cp zshrc ~/.zshrc
 cp p10k.zsh ~/.p10k.zsh
 
-mkdir -p ~/.config
-mkdir -p ~/repos
-mkdir -p ~/tests
+# Создание необходимых директорий
+mkdir -p ~/.config ~/repos ~/tests
 
-
+# Клонирование репозиториев для zsh плагинов
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-git clone https://github.com/HamletSargsyan/astronvim_config ~/.config/nvim
-
+# Установка дополнительных инструментов
 curl https://getcroc.schollz.com | bash
 
+# Установка других программ и инструментов в зависимости от окружения
 if [[ -n "$TERMUX_VERSION" ]]; then
-    rm -rfv ~/.termux/
-    cp -r ./termux/ ~/.termux/
+    # Termux-specific setup
+    pkg install rust python-cryptography
+    pip install poetry
+    cp meslo-font/"MesloLGS NF Regular.ttf" termux/font.ttf
+else
+    # Ubuntu-specific setup
+    curl -sSL https://install.python-poetry.org | python3 -
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
+    pip install ruff
+    sudo apt install -y openssh-server
+    sudo systemctl start ssh
+    sudo systemctl enable ssh
+    mkdir -p ~/.local/share/fonts/
+    cp meslo-font/* ~/.local/share/fonts/
+    fc-cache -f -v
+    sudo apt install -y python3.12-venv flatpak
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 fi
 
+# Установка дополнительных инструментов
 go install github.com/bloznelis/typioca@latest
 go install github.com/mistakenelf/fm@latest
 
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java 19.0.2-open
+# Установка SDKMAN! и Java
+if [[ ! -d "$HOME/.sdkman" ]]; then
+    curl -s "https://get.sdkman.io" | bash
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk install java 19.0.2-open
+fi
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-nvm install 20
+# Установка NVM и Node.js
+if [[ ! -d "$HOME/.nvm" ]]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    source ~/.nvm/nvm.sh
+    nvm install 20
+fi
 
+# Установка Rust инструментов
 cargo install numbat-cli
 
+# Отключение приветственного сообщения
 touch ~/.hushlogin
 
+# Переключение оболочки на zsh
 exec zsh
