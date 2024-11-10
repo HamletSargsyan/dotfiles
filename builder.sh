@@ -55,6 +55,10 @@ if ! command -v pip3 &> /dev/null; then
     $SUDO_COMMAND $PKG_MANAGER install -y python3-pip
 fi
 
+curl https://pyenv.run | bash
+pyenv install 3.12.7
+pyenv global 3.12.7
+
 # Установка pip пакетов
 for package in "${pip_packages[@]}"; do
     pip3 install "$package"
@@ -62,7 +66,7 @@ done
 
 # Установка oh-my-zsh и смена оболочки
 RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-chsh -s $(which zsh)
+$SUDO_COMMANDchsh -s $(which zsh)
 
 # Копирование конфигураций
 cp zshrc ~/.zshrc
@@ -104,6 +108,7 @@ fi
 # Установка дополнительных инструментов
 go install github.com/bloznelis/typioca@latest
 go install github.com/mistakenelf/fm@latest
+go install github.com/go-task/task/v3/cmd/task@latest
 
 # Установка SDKMAN! и Java
 if [[ ! -d "$HOME/.sdkman" ]]; then
@@ -126,4 +131,4 @@ cargo install numbat-cli
 touch ~/.hushlogin
 
 # Переключение оболочки на zsh
-exec zsh
+exec "$SHELL"
