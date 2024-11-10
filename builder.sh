@@ -8,7 +8,7 @@ if [[ -n "$TERMUX_VERSION" ]]; then
     termux-change-repo
     PKG_MANAGER="pkg"
 else
-    if command -v sudo &> /dev/null; then
+    if command -v sudo &>/dev/null; then
         SUDO_COMMAND="sudo"
     fi
     PKG_MANAGER="apt"
@@ -51,7 +51,7 @@ for package in "${packages[@]}"; do
 done
 
 # Проверка и установка pip3
-if ! command -v pip3 &> /dev/null; then
+if ! command -v pip3 &>/dev/null; then
     $SUDO_COMMAND $PKG_MANAGER install -y python3-pip
 fi
 
@@ -65,20 +65,40 @@ if [[ -n "$TERMUX_VERSION" ]]; then
     pkg install rust python-cryptography
     pip install poetry
     cp meslo-font/"MesloLGS NF Regular.ttf" termux/font.ttf
+    # Отключение приветственного сообщения
+    touch ~/.hushlogin
 else
     # Ubuntu-specific setup
     curl -sSL https://install.python-poetry.org | python3 -
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
     pip install ruff
-    sudo apt install -y openssh-server
+
+    sudo apt install -y openssh-server python3.12-venv flatpak
+
     sudo systemctl start ssh
     sudo systemctl enable ssh
+    
     mkdir -p ~/.local/share/fonts/
     cp meslo-font/* ~/.local/share/fonts/
     fc-cache -f -v
-    sudo apt install -y python3.12-venv flatpak
+
+    snap uninstall firefox --purge
+
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpak install flathub org.mozilla.firefox
+    flatpak install flathub com.spotify.Client
+    flatpak install flathub com.github.jgraph.drawio
+    flatpak install flathub org.gimp.GIMP
+    flatpak install flathub org.inkscape.Inkscape
+    flatpak install flathub com.visualstudio.code
+    flatpak install flathub io.telegram.desktop
+    flatpak install flathub com.obsidian.Obsidian
+    flatpak install flathub com.github.Anuken.Mindustry
+    flatpak install flathub org.openttd.OpenTTD
+    flatpak install flathub org.gnome.Extensions
+
+
 fi
 
 # Установка pip пакетов
@@ -105,8 +125,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # Установка дополнительных инструментов
 curl https://getcroc.schollz.com | bash
 
-
-
 # Установка дополнительных инструментов
 go install github.com/bloznelis/typioca@latest
 go install github.com/mistakenelf/fm@latest
@@ -129,8 +147,6 @@ fi
 # Установка Rust инструментов
 cargo install numbat-cli
 
-# Отключение приветственного сообщения
-touch ~/.hushlogin
 
 # Переключение оболочки на zsh
 exec "$SHELL"
