@@ -86,17 +86,17 @@ else
     snap uninstall firefox --purge
 
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    flatpak install flathub org.mozilla.firefox
-    flatpak install flathub com.spotify.Client
-    flatpak install flathub com.github.jgraph.drawio
-    flatpak install flathub org.gimp.GIMP
-    flatpak install flathub org.inkscape.Inkscape
-    flatpak install flathub com.visualstudio.code
-    flatpak install flathub io.telegram.desktop
-    flatpak install flathub com.obsidian.Obsidian
-    flatpak install flathub com.github.Anuken.Mindustry
-    flatpak install flathub org.openttd.OpenTTD
-    flatpak install flathub org.gnome.Extensions
+    flatpak install -y flathub org.mozilla.firefox
+    flatpak install -y flathub com.spotify.Client
+    flatpak install -y flathub com.github.jgraph.drawio
+    flatpak install -y flathub org.gimp.GIMP
+    flatpak install -y flathub org.inkscape.Inkscape
+    flatpak install -y flathub com.visualstudio.code
+    flatpak install -y flathub io.telegram.desktop
+    flatpak install -y flathub com.obsidian.Obsidian
+    flatpak install -y flathub com.github.Anuken.Mindustry
+    flatpak install -y flathub org.openttd.OpenTTD
+    flatpak install -y flathub org.gnome.Extensions
 
 
 fi
