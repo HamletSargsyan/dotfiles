@@ -59,6 +59,28 @@ curl https://pyenv.run | bash
 pyenv install 3.12.7
 pyenv global 3.12.7
 
+# Установка других программ и инструментов в зависимости от окружения
+if [[ -n "$TERMUX_VERSION" ]]; then
+    # Termux-specific setup
+    pkg install rust python-cryptography
+    pip install poetry
+    cp meslo-font/"MesloLGS NF Regular.ttf" termux/font.ttf
+else
+    # Ubuntu-specific setup
+    curl -sSL https://install.python-poetry.org | python3 -
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
+    pip install ruff
+    sudo apt install -y openssh-server
+    sudo systemctl start ssh
+    sudo systemctl enable ssh
+    mkdir -p ~/.local/share/fonts/
+    cp meslo-font/* ~/.local/share/fonts/
+    fc-cache -f -v
+    sudo apt install -y python3.12-venv flatpak
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+fi
+
 # Установка pip пакетов
 for package in "${pip_packages[@]}"; do
     pip3 install "$package"
@@ -83,27 +105,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # Установка дополнительных инструментов
 curl https://getcroc.schollz.com | bash
 
-# Установка других программ и инструментов в зависимости от окружения
-if [[ -n "$TERMUX_VERSION" ]]; then
-    # Termux-specific setup
-    pkg install rust python-cryptography
-    pip install poetry
-    cp meslo-font/"MesloLGS NF Regular.ttf" termux/font.ttf
-else
-    # Ubuntu-specific setup
-    curl -sSL https://install.python-poetry.org | python3 -
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    sudo dpkg-divert --rename --add /usr/lib/$(py3versions -d)/EXTERNALLY-MANAGED
-    pip install ruff
-    sudo apt install -y openssh-server
-    sudo systemctl start ssh
-    sudo systemctl enable ssh
-    mkdir -p ~/.local/share/fonts/
-    cp meslo-font/* ~/.local/share/fonts/
-    fc-cache -f -v
-    sudo apt install -y python3.12-venv flatpak
-    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-fi
+
 
 # Установка дополнительных инструментов
 go install github.com/bloznelis/typioca@latest
