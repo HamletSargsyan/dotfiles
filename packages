@@ -3,6 +3,7 @@ packages=(
   eza
   python3
   go
+  rustup
   bat
   bpython
   neofetch

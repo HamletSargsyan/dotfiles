@@ -26,6 +26,7 @@ preinstall_pkg() {
     cd $tmp_dir/yay
     makepkg -si --noconfirm
 
+    cd $CUR_DIR
     log "success" "yay installed"
   fi
 
@@ -52,7 +53,7 @@ preinstall_pkg() {
     log "success" "rustup exists"
   else
     log "warning" "rustup not exists. Installing..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    sudo pacman -S --noconfirm rustup
     log "success" "rustup installed"
   fi
 
