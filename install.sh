@@ -148,8 +148,14 @@ fc-cache -f -v
 log "info" "creating directories"
 mkdir -p ~/.config ~/projects ~/tests
 
-read -p "delete temp directories? [Y/n]: "
+log "info" "instaling nvim config"
+mv ~/.config/nvim ~/.config/nvim.bak
+mv ~/.local/share/nvim ~/.local/share/nvim.bak
+mv ~/.local/state/nvim ~/.local/state/nvim.bak
+mv ~/.cache/nvim ~/.cache/nvim.bak
+git clone https://github.com/HamletSargsyan/astronvim_config ~/.config/nvim
 
+read -p "delete temp directories? [Y/n]: "
 while true; do
     read -p "delete temp directories? [Y/n] " yn
     case $yn in
