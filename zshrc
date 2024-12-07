@@ -13,7 +13,7 @@ source $ZSH/oh-my-zsh.sh
 alias python="python3"
 alias py="python3"
 alias bpy="bpython"
-
+alias ls="eza --icons=always"
 
 export PATH=$PATH:~/go/bin
 export PATH=$PATH:~/.local/bin/
