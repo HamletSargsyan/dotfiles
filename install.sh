@@ -61,7 +61,7 @@ preinstall_pkg() {
     log "success" "flatpak exists"
   else
     log "warning" "flatpak not exists. Installing..."
-    sudo pacman -S flatpak
+    sudo pacman -S --noconfirm flatpak
     log "success" "flatpak installed"
   fi
 
@@ -74,7 +74,7 @@ install_pkg() {
   local pkg_list=$2
 
 
-  for pkg in $pkg_list[@]; do
+  for pkg in "${pkg_list[@]}"; do
     local full_cmd="$cmd $pkg"
 
     log "info" "$full_cmd"
@@ -155,9 +155,9 @@ mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 git clone https://github.com/HamletSargsyan/astronvim_config ~/.config/nvim
 
-read -p "delete temp directories? [Y/n]: "
+
 while true; do
-    read -p "delete temp directories? [Y/n] " yn
+    read -p "delete temp directories? [y/n] " yn
     case $yn in
         [Yy]* )
           rm -rfv "${TEMP_DIRS[@]}"
