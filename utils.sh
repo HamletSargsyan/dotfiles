@@ -29,7 +29,7 @@ log() {
       exit 1
   esac
 
-  echo -e "[$color $level $NC] - ${date +"%T %D"} $message"
+  echo -e "[$color $level $NC] - ${date +'%T %D'} $message"
 }
 
 check_command() {
