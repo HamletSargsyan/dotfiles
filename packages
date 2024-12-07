@@ -21,6 +21,7 @@ packages=(
   zip
   flatpak
   docker
+  github-cli
 )
 
 aur_packages=(
