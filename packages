@@ -1,0 +1,58 @@
+packages=(
+  git
+  eza
+  python3
+  go
+  rustup
+  bat
+  bpython
+  neofetch
+  fastfetch
+  vim
+  neovim
+  calc
+  htop
+  curl
+  wget
+  tree
+  zsh
+  which
+  man
+  zip
+  flatpak
+  docker
+)
+
+aur_packages=(
+  firefox
+  spotify
+)
+
+pypi_packages=(
+  ruff
+  pyright
+  black
+  isort
+  mypy
+  pre-commit
+  uv
+)
+
+go_packages=(
+  github.com/bloznelis/typioca@latest
+  github.com/mistakenelf/fm@latest
+  github.com/go-task/task/v3/cmd/task@latest
+)
+
+rust_crates=(
+  numbat-cli
+  du-dust
+  git-delta
+)
+
+flatpak_apps=(
+  io.telegram.desktop
+  com.obsidian.Obsidian
+  com.github.Anuken.Mindustry
+  org.openttd.OpenTTD
+)
