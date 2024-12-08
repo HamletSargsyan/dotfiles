@@ -28,7 +28,7 @@ log() {
       echo -e "${RED}Unknown level: $level${NC}"
   esac
 
-  echo -e "[$color $level $NC] - $(date +'%T %D') $message"
+  echo -e "$color [ $level ] - $(date +'%T') - $message$NC"
 }
 
 check_command() {
