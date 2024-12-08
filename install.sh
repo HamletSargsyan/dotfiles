@@ -36,6 +36,10 @@ preinstall_pkg() {
   else
     log "warning" "pyenv not exists. Installing..."
     curl https://pyenv.run | bash
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+
     log "success" "pyenv installed"
 
     local python_version="3.12.7"
@@ -98,7 +102,7 @@ install_pkg "flatpak install -y" flatpak_apps
 
 log "info" "enabling services"
 sudo systemctl enable --now sshd
-sudo systemstl enable --now docker.service
+sudo systemctl enable --now docker.service
 sudo systemctl enable --now docker.socket
 
 log "info" "installing oh-my-zsh..."
@@ -173,3 +177,4 @@ while true; do
 done
 
 log "success" "dotfiles installed"
+
