@@ -49,7 +49,7 @@ preinstall_pkg() {
     pyenv global 3.12.7
     log "info" "python $python_version instelled"
 
-    source ~/.pyenv/bin/
+    export PATH=$PATH:~/.pyenv/bin/
   fi
 
   log "info" "checking rustup..."
