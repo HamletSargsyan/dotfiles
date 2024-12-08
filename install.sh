@@ -19,7 +19,7 @@ preinstall_pkg() {
     log "success" "yay exists"
   else
     log "warning" "yay not exists. Installing..."
-    local tmp_dir=$(mktemp)
+    local tmp_dir=$(mktemp -d)
     TEMP_DIRS+=("$tmp_dir")
     
     git clone https://aur.archlinux.org/yay.git $tmp_dir/yay
