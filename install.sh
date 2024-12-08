@@ -85,9 +85,9 @@ install_pkg() {
     log "info" "$full_cmd"
 
     if ! $full_cmd; then
-      log "error" "Failed to install `$pkg`"
+      log "error" "Failed to install $pkg"
     else
-      log "success" "Installed `$pkg`"
+      log "success" "Installed $pkg"
     fi
   done
 }
