@@ -20,7 +20,7 @@ preinstall_pkg() {
   else
     log "warning" "yay not exists. Installing..."
     local tmp_dir=$(mktemp)
-    TEMP_DIRS+=(tmp_dir)
+    TEMP_DIRS+=("$tmp_dir")
     
     git clone https://aur.archlinux.org/yay.git $tmp_dir/yay
     cd $tmp_dir/yay
@@ -76,8 +76,8 @@ preinstall_pkg() {
 
 install_pkg() {
   local cmd=$1
-  local pkg_list=$2
-
+  local array_name=$2 
+  declare -n pkg_list=$array_name
 
   for pkg in "${pkg_list[@]}"; do
     local full_cmd="$cmd $pkg"
