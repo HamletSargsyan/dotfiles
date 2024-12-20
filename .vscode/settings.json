@@ -1,0 +1,23 @@
+{
+    "files.associations": {
+        "packages": "shellscript"
+    },
+    "editor.selectionClipboard": false,
+    "cSpell.words": [
+        "flathub",
+        "makepkg",
+        "meslo",
+        "mktemp",
+        "noanswerclean",
+        "noanswerdiff",
+        "noansweredit",
+        "noconfirm",
+        "pacman",
+        "powerlevel",
+        "pyenv",
+        "pypi",
+        "RUNZSH",
+        "rustup",
+        "sdkman"
+    ]
+}
