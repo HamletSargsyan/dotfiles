@@ -1,3 +1,5 @@
+# cspell: disable
+
 packages=(
   git
   eza
@@ -22,11 +24,23 @@ packages=(
   flatpak
   docker
   github-cli
+  noto-fonts-cjk
+  noto-fonts-emoji
+  ttf-firacode-nerd
+  unzip
+  bluez
+  bluez-utils
+  swww
+  nnn
+  pavucontrol
 )
 
 aur_packages=(
   firefox
   spotify
+  visual-studio-code-bin
+  btop
+  cava
 )
 
 pypi_packages=(
@@ -52,8 +66,12 @@ rust_crates=(
 )
 
 flatpak_apps=(
-  io.telegram.desktop
+  org.telegram.desktop
   com.obsidian.Obsidian
   com.github.Anuken.Mindustry
   org.openttd.OpenTTD
+)
+
+node_packages=(
+  "cspell@latest"
 )
