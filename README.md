@@ -2,26 +2,14 @@
 
 ## Install
 
-### Ubuntu
+### Archlinux
 
 ```bash
-sudo apt update
-sudo apt install git
+sudo pacman -Syu
+sudo pacman -Sy git
 
 git clone https://github.com/HamletSargsyan/dotfiles.git
 
 cd dotfiles
-./builder.sh
-```
-
-### Termux
-
-```bash
-pkg update
-pkg install git
-
-git clone https://github.com/HamletSargsyan/dotfiles.git
-
-cd dotfiles
-./builder.sh
+./install.sh
 ```
