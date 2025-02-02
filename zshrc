@@ -9,15 +9,20 @@ plugins=(python zsh-autosuggestions z zsh-syntax-highlighting poetry pip poetry-
 
 source $ZSH/oh-my-zsh.sh
 
+export EDITOR=vim
 
 alias python="python3"
 alias py="python3"
 alias bpy="bpython"
 alias ls="eza --icons=always"
+alias tree="eza --icons=always --tree"
 
 export PATH=$PATH:~/go/bin
 export PATH=$PATH:~/.local/bin/
+export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:~/.nimble/bin/
 
+export XDG_BIN_HOME="~/.local/bin"
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
