@@ -24,6 +24,7 @@ packages=(
   flatpak
   docker
   github-cli
+  noto-fonts
   noto-fonts-cjk
   noto-fonts-emoji
   ttf-firacode-nerd
@@ -33,6 +34,35 @@ packages=(
   swww
   nnn
   pavucontrol
+  otf-font-awesome
+  otf-fontawesome
+  ttf-iosevka
+  ttf-font-awesome
+  swww
+  libnotify
+  pfetch
+  nnn
+  xdg-desktop-portal-gtk
+  archlinux-keyring
+  gnome-keyring
+  blueman
+  firacode-ttf
+  ttf-firacode-nerd
+  xdg-desktop-portal-hyprland
+  nim
+  feh
+  lazygit
+  onefetch
+  duf
+  rofi
+  base-devel
+  waybar
+  poedit
+  pcre
+  fzf
+  batsignal
+  rsync
+  telegram-desktop
 )
 
 aur_packages=(
@@ -51,6 +81,7 @@ pypi_packages=(
   mypy
   pre-commit
   uv
+  pylint
 )
 
 go_packages=(
@@ -66,7 +97,6 @@ rust_crates=(
 )
 
 flatpak_apps=(
-  org.telegram.desktop
   com.obsidian.Obsidian
   com.github.Anuken.Mindustry
   org.openttd.OpenTTD
