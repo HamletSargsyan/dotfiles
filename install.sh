@@ -26,7 +26,7 @@ preinstall_pkg() {
     local tmp_dir=$(mktemp -d)
     TEMP_DIRS+=("$tmp_dir")
 
-    run_command "git clone https://aur.archlinux.org/yay.git" $tmp_dir/yay
+    run_command "git clone https://aur.archlinux.org/yay.git $tmp_dir/yay"
     run_command "cd $tmp_dir/yay"
     run_command "makepkg -si --noconfirm"
 
@@ -49,8 +49,8 @@ preinstall_pkg() {
     local python_version="3.12.7"
 
     log "info" "installing python $python_version using pyenv..."
-    run_command "pyenv install 3.12.7"
-    run_command "pyenv global 3.12.7"
+    run_command "pyenv install $python_version"
+    run_command "pyenv global $python_version"
     log "info" "python $python_version installed"
   fi
 
